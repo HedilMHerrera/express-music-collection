@@ -1,0 +1,50 @@
+# Node dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+
+# Build output
+dist/
+build/
+
+# dotenv environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary
+tmp/
+
+# Optional npm cache
+.npm
+
+# Misc
+*.iml
+
+# If you use logs or other generated files
+local-logs/
+
+# Ignore the node-repl history
+.node_repl_history

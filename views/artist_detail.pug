@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= artist.name
+  p
+    strong Born: 
+    | #{artist.date_of_birth_formatted}
+  p
+    strong Died:
+    | #{artist.date_of_death_formatted}

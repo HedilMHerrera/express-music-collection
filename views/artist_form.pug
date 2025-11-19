@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  form(method='POST')
+    div
+      label(for='first_name') First name:
+      input#first_name(type='text', name='first_name')
+    div
+      label(for='family_name') Family name:
+      input#family_name(type='text', name='family_name')
+    div
+      label(for='date_of_birth') Date of birth:
+      input#date_of_birth(type='date', name='date_of_birth')
+    div
+      label(for='date_of_death') Date of death:
+      input#date_of_death(type='date', name='date_of_death')
+    div
+      button(type='submit') Submit

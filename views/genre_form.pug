@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  form(method='POST')
+    div
+      label(for='name') Name:
+      input#name(type='text', name='name')
+    div
+      button(type='submit') Submit

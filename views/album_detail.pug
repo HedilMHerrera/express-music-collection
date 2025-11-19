@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1= album.title
+  p
+    strong Artist: 
+    if album.artist
+      a(href=album.artist.url)= album.artist.name
+  p
+    strong Label: 
+    | #{album.label}
+  p
+    strong Summary:
+    | #{album.summary}
+  if album.genre && album.genre.length
+    p
+      strong Genres:
+      ul
+        each g in album.genre
+          li= g.name
+  if album_instances && album_instances.length
+    h2 Copies
+    ul
+      each ci in album_instances
+        li
+          a(href=ci.url)= ci.imprint
+          |  - #{ci.status}
+  else
+    p No copies available.

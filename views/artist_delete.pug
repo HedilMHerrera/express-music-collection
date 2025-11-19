@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  if artist
+    p Are you sure you want to delete the artist: "#{artist.name}"?
+    if artist_albums && artist_albums.length
+      p This artist has the following albums and cannot be deleted:
+      ul
+        each a in artist_albums
+          li
+            a(href='/catalog/album/' + a._id)= a.title
+      a(href='/catalog/artist/' + artist._id) Cancel
+    else
+      form(method='POST')
+        input(type='hidden', name='artistid', value=artist._id)
+        button(type='submit') Delete
+      a(href='/catalog/artist/' + artist._id) Cancel
+  else
+    p Artist not found.

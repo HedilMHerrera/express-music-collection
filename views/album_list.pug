@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  if album_list && album_list.length
+    ul
+      each album in album_list
+        li
+          a(href=album.url)= album.title
+          |  by
+          if album.artist
+            | 
+            a(href=album.artist.url)= album.artist.name
+          else
+            | Unknown
+  else
+    p No albums found.

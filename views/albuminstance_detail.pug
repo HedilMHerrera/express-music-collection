@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p
+    strong Album:
+    a(href=albuminstance.album.url)= albuminstance.album.title
+  p
+    strong Imprint:
+    | #{albuminstance.imprint}
+  p
+    strong Status:
+    | #{albuminstance.status}
+  p
+    strong Due back:
+    | #{albuminstance.due_back_formatted}

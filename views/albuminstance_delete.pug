@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  if albuminstance
+    p Are you sure you want to delete this copy: "#{albuminstance.imprint}" of album
+    p
+      a(href='/catalog/album/' + albuminstance.album._id)= albuminstance.album.title
+    form(method='POST')
+      input(type='hidden', name='albuminstanceid', value=albuminstance._id)
+      button(type='submit') Delete
+    a(href='/catalog/albuminstance/' + albuminstance._id) Cancel
+  else
+    p Copy not found.

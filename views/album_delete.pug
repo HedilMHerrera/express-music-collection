@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  if album
+    p Are you sure you want to delete the album: "#{album.title}"?
+    if album_instances && album_instances.length
+      p This album has the following copies and cannot be deleted:
+      ul
+        each ci in album_instances
+          li #{ci.imprint} - #{ci.status}
+      a(href='/catalog/album/' + album._id) Cancel
+    else
+      form(method='POST')
+        input(type='hidden', name='albumid', value=album._id)
+        button(type='submit') Delete
+      a(href='/catalog/album/' + album._id) Cancel
+  else
+    p Album not found.

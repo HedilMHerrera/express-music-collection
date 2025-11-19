@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  form(method='POST')
+    div
+      label(for='album') Album:
+      select#album(name='album')
+        each a in album_list
+          option(value=a._id)= a.title
+    div
+      label(for='imprint') Imprint:
+      input#imprint(type='text', name='imprint')
+    div
+      label(for='due_back') Due back:
+      input#due_back(type='date', name='due_back')
+    div
+      label(for='status') Status:
+      select#status(name='status')
+        option(value='Available') Available
+        option(value='Maintenance') Maintenance
+        option(value='Loaned') Loaned
+        option(value='Reserved') Reserved
+    div
+      button(type='submit') Submit

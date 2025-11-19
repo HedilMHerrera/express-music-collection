@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  if albuminstance_list.length
+    ul
+      each ai in albuminstance_list
+        li
+          a(href=ai.url)= ai.imprint
+          |  (#{ai.album.title}) - #{ai.status}
+  else
+    p No album copies found.

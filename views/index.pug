@@ -1,5 +1,82 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .d-flex.justify-content-between.align-items-center.mb-4
+    .d-flex.flex-column
+      h1.mb-0 Dashboard
+      small.text-muted Bienvenidos a mi coleccion de musica personal.
+    a.btn.btn-primary(href='/catalog/album/create')
+      span.me-2 +
+      | Agregar album
+
+  .row.g-3.mb-4
+    .col-6.col-md-3
+      .card.shadow-sm.rounded.p-3.h-100
+        .d-flex.align-items-center.justify-content-between
+          .me-3
+            small.text-muted Total Albums
+            h3.mb-0 142
+          .badge.bg-success.rounded-pill.text-white.small +4 esta semana
+    .col-6.col-md-3
+      .card.shadow-sm.rounded.p-3.h-100
+        .d-flex.align-items-center.justify-content-between
+          .me-3
+            small.text-muted Total Artistas
+            h3.mb-0 89
+          .badge.bg-success.rounded-pill.text-white.small +1 esta semana
+    .col-6.col-md-3
+      .card.shadow-sm.rounded.p-3.h-100
+        small.text-muted Generos
+        h3.mb-0 12
+    .col-6.col-md-3
+      .card.shadow-sm.rounded.p-3.h-100
+        small.text-muted Ejemplares
+        h3.mb-0 142
+
+  .row.g-3
+    .col-lg-8
+      .card.shadow-sm.h-100.rounded
+        .card-body
+          .d-flex.justify-content-between.align-items-center.mb-3
+            h5.mb-0 Colecciones por genero
+            select.form-select.form-select-sm(style='width:120px')
+              option Este año
+              option 2024
+              option 2023
+              option 2022
+
+          .chart-area.mt-3
+            .bars.d-flex.align-items-end.gap-3
+              .bar(style='height:220px')
+              .bar(style='height:150px')
+              .bar(style='height:80px')
+              .bar(style='height:160px')
+              .bar(style='height:60px')
+            .labels.d-flex.justify-content-between.mt-3
+              span.text-muted Rock
+              span.text-muted Pop
+              span.text-muted Jazz
+              span.text-muted Electronica
+              span.text-muted Clasica
+
+    .col-lg-4
+      .card.shadow-sm.h-100.rounded
+        .card-body
+          .d-flex.justify-content-between.align-items-center
+            h5.mb-0 Adiciones recientes
+            a.small(href='#') Ver todos →
+          ul.list-unstyled.mt-3
+            li.d-flex.align-items-center.mb-3
+              .thumb.me-3(style='width:56px;height:56px;background:#ddd;border-radius:8px')
+              .flex-grow-1
+                strong.mb-0.d-block Dark Side of the Moon
+                small.text-muted Pink Floyd · Rock
+              .text-muted •••
+            li.d-flex.align-items-center.mb-3
+              .thumb.me-3(style='width:56px;height:56px;background:#ddd;border-radius:8px')
+              .flex-grow-1
+                strong.mb-0.d-block Random Access Memories
+                small.text-muted Daft Punk · Electronic
+              .text-muted •••
+          .d-grid.mt-3
+            button.btn.btn-outline-secondary Add New Item

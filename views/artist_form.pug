@@ -5,15 +5,20 @@ block content
   form(method='POST')
     div
       label(for='first_name') First name:
-      input#first_name(type='text', name='first_name')
+      br
+      input#first_name(type='text', placeholder='First name (Christian)', name='first_name')
     div
       label(for='family_name') Family name:
+      br
       input#family_name(type='text', name='family_name')
     div
       label(for='date_of_birth') Date of birth:
+      br
       input#date_of_birth(type='date', name='date_of_birth')
     div
       label(for='date_of_death') Date of death:
+      br
       input#date_of_death(type='date', name='date_of_death')
     div
+    
       button(type='submit') Submit

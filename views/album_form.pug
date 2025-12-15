@@ -5,15 +5,18 @@ block content
   form(method='POST')
     div
       label(for='title') Title:
+      br
       input#title(type='text', name='title', value=(album && album.title) ? album.title : '')
     div
       label(for='artist') Artist:
+      br
       select#artist(name='artist')
         each a in artists
           - var selected = (album && album.artist) ? (String(a._id) === String(album.artist)) : false;
           option(value=a._id selected=selected)= a.name
     div
       label(for='summary') Summary:
+      br
       textarea#summary(name='summary') #{(album && album.summary) ? album.summary : ''}
     div
       label Genres:
@@ -26,6 +29,7 @@ block content
               |  #{g.name}
     div
       label(for='label') Label:
+      br
       input#label(type='text', name='label', value=(album && album.label) ? album.label : '')
     div
       button(type='submit') Submit

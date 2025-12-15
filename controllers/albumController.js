@@ -33,7 +33,6 @@ exports.album_detail = async function (req, res, next) {
   }
 };
 
-// Mostrar formulario de creación de álbum en GET.
 exports.album_create_get = async function (req, res, next) {
   try {
     const [artists, genres] = await Promise.all([Artist.find(), Genre.find()]);
@@ -43,9 +42,7 @@ exports.album_create_get = async function (req, res, next) {
   }
 };
 
-// Procesar la creación de un álbum en POST.
 exports.album_create_post = [
-  // Convertir genre a arreglo.
   (req, res, next) => {
     if (!Array.isArray(req.body.genre)) {
       req.body.genre = req.body.genre ? [req.body.genre] : [];
@@ -53,7 +50,6 @@ exports.album_create_post = [
     next();
   },
 
-  // Validar y sanear campos.
   body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('artist', 'Artist must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
@@ -73,7 +69,6 @@ exports.album_create_post = [
     });
 
     if (!errors.isEmpty()) {
-      // Hay errores. Renderizar el formulario de nuevo con los valores saneados/mensajes de error.
       try {
         const [artists, genres] = await Promise.all([Artist.find(), Genre.find()]);
         // Mark selected genres as checked.
@@ -89,7 +84,6 @@ exports.album_create_post = [
       }
       return;
     } else {
-      // Los datos del formulario son válidos. Guardar álbum.
       try {
         await album.save();
         res.redirect(album.url);
@@ -100,7 +94,6 @@ exports.album_create_post = [
   },
 ];
 
-// Mostrar formulario de eliminación de álbum en GET.
 exports.album_delete_get = async function (req, res, next) {
   try {
     const [album, albumInstances] = await Promise.all([
@@ -119,7 +112,6 @@ exports.album_delete_get = async function (req, res, next) {
   }
 };
 
-// Procesar la eliminación de álbum en POST.
 exports.album_delete_post = async function (req, res, next) {
   try {
     const [album, albumInstances] = await Promise.all([
@@ -128,11 +120,9 @@ exports.album_delete_post = async function (req, res, next) {
     ]);
 
     if (albumInstances.length > 0) {
-      // El álbum tiene ejemplares. Renderizar de la misma manera que en GET.
       res.render('album_delete', { title: 'Delete Album', album: album, album_instances: albumInstances });
       return;
     } else {
-      // Los datos están bien para eliminar.
       await Album.findByIdAndRemove(req.body.albumid);
       res.redirect('/catalog/albums');
     }
@@ -141,7 +131,6 @@ exports.album_delete_post = async function (req, res, next) {
   }
 };
 
-// Mostrar formulario de actualización de álbum en GET.
 exports.album_update_get = async function (req, res, next) {
   try {
     const [album, artists, genres] = await Promise.all([
@@ -154,7 +143,7 @@ exports.album_update_get = async function (req, res, next) {
       err.status = 404;
       return next(err);
     }
-    // Marcar los géneros seleccionados
+
     for (const genre of genres) {
       for (const albGenre of album.genre) {
         if (genre._id.toString() === albGenre.toString()) {
@@ -168,16 +157,14 @@ exports.album_update_get = async function (req, res, next) {
   }
 };
 
-// Procesar la actualización de álbum en POST.
 exports.album_update_post = [
-  // Convertir genre a arreglo
   (req, res, next) => {
     if (!Array.isArray(req.body.genre)) {
       req.body.genre = req.body.genre ? [req.body.genre] : [];
     }
     next();
   },
-  // Validar y sanear
+
   body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('artist', 'Artist must not be empty.').trim().isLength({ min: 1 }).escape(),
   body('summary', 'Summary must not be empty.').trim().isLength({ min: 1 }).escape(),
@@ -194,13 +181,12 @@ exports.album_update_post = [
       label: req.body.label,
       genre: typeof req.body.genre === 'undefined' ? [] : req.body.genre,
       release_date: req.body.release_date ? req.body.release_date : null,
-      _id: req.params.id, // Esto es requerido, si no se asignará un nuevo ID.
+      _id: req.params.id,
     });
 
     if (!errors.isEmpty()) {
       try {
         const [artists, genres] = await Promise.all([Artist.find(), Genre.find()]);
-        // Marcar géneros seleccionados
         for (const genre of genres) {
           if (album.genre.indexOf(genre._id) > -1) {
             genre.checked = 'true';

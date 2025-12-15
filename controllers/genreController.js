@@ -48,7 +48,6 @@ exports.genre_create_post = [
   },
 ];
 
-// Mostrar formulario de eliminación de género en GET.
 exports.genre_delete_get = async function (req, res, next) {
   try {
     const [genre, genreAlbums] = await Promise.all([
@@ -65,7 +64,6 @@ exports.genre_delete_get = async function (req, res, next) {
   }
 };
 
-// Procesar la eliminación de género en POST.
 exports.genre_delete_post = async function (req, res, next) {
   try {
     const [genre, genreAlbums] = await Promise.all([
@@ -84,7 +82,6 @@ exports.genre_delete_post = async function (req, res, next) {
   }
 };
 
-// Mostrar formulario de actualización de género en GET.
 exports.genre_update_get = async function (req, res, next) {
   try {
     const genre = await Genre.findById(req.params.id).exec();
@@ -99,7 +96,6 @@ exports.genre_update_get = async function (req, res, next) {
   }
 };
 
-// Procesar la actualización de género en POST.
 exports.genre_update_post = [
   body('name', 'Genre name required').trim().isLength({ min: 1 }).escape(),
   async (req, res, next) => {

@@ -68,7 +68,6 @@ exports.albuminstance_create_post = [
   },
 ];
 
-// Mostrar formulario de eliminación de ejemplar en GET.
 exports.albuminstance_delete_get = async function (req, res, next) {
   try {
     const instance = await AlbumInstance.findById(req.params.id).populate('album').exec();
@@ -82,7 +81,6 @@ exports.albuminstance_delete_get = async function (req, res, next) {
   }
 };
 
-// Procesar la eliminación de ejemplar en POST.
 exports.albuminstance_delete_post = async function (req, res, next) {
   try {
     await AlbumInstance.findByIdAndRemove(req.body.albuminstanceid);
@@ -92,7 +90,6 @@ exports.albuminstance_delete_post = async function (req, res, next) {
   }
 };
 
-// Mostrar formulario de actualización de ejemplar en GET.
 exports.albuminstance_update_get = async function (req, res, next) {
   try {
     const [instance, albums] = await Promise.all([
@@ -110,7 +107,6 @@ exports.albuminstance_update_get = async function (req, res, next) {
   }
 };
 
-// Procesar la actualización de ejemplar en POST.
 exports.albuminstance_update_post = [
   body('album', 'Album must be specified').trim().isLength({ min: 1 }).escape(),
   body('imprint', 'Imprint required').trim().isLength({ min: 1 }).escape(),

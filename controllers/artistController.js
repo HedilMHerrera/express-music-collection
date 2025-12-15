@@ -2,7 +2,6 @@ const Artist = require('../models/artist');
 const { body, validationResult } = require('express-validator');
 const Album = require('../models/album');
 
-
 exports.artist_list = async function (req, res, next) {
   try {
     const artists = await Artist.find().sort([['family_name', 'ascending']]);
@@ -57,7 +56,6 @@ exports.artist_create_post = [
   },
 ];
 
-// Mostrar formulario de eliminación de artista en GET.
 exports.artist_delete_get = async function (req, res, next) {
   try {
     const [artist, artistAlbums] = await Promise.all([
@@ -74,7 +72,6 @@ exports.artist_delete_get = async function (req, res, next) {
   }
 };
 
-// Procesar la eliminación de artista en POST.
 exports.artist_delete_post = async function (req, res, next) {
   try {
     const [artist, artistAlbums] = await Promise.all([
@@ -82,7 +79,6 @@ exports.artist_delete_post = async function (req, res, next) {
       Album.find({ artist: req.body.artistid }).exec(),
     ]);
     if (artistAlbums.length > 0) {
-      // El artista tiene álbumes. Renderizar igual que en GET.
       res.render('artist_delete', { title: 'Delete Artist', artist: artist, artist_albums: artistAlbums });
       return;
     } else {
@@ -94,7 +90,6 @@ exports.artist_delete_post = async function (req, res, next) {
   }
 };
 
-// Mostrar formulario de actualización de artista en GET.
 exports.artist_update_get = async function (req, res, next) {
   try {
     const artist = await Artist.findById(req.params.id).exec();
@@ -109,7 +104,6 @@ exports.artist_update_get = async function (req, res, next) {
   }
 };
 
-// Procesar la actualización de artista en POST.
 exports.artist_update_post = [
   body('first_name').trim().isLength({ min: 1 }).escape().withMessage('First name required'),
   body('family_name').trim().isLength({ min: 1 }).escape().withMessage('Family name required'),

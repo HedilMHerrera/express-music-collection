@@ -10,7 +10,6 @@ var catalogRouter = require('./routes/catalog');
 
 var app = express();
 
-// configuración del motor de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -24,18 +23,14 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);
 
-// capturar 404 y pasar al manejador de errores
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// manejador de errores
 app.use(function(err, req, res, next) {
-  // establecer variables locales, mostrar error solo en desarrollo
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // renderizar la página de error
   res.status(err.status || 500);
   res.render('error');
 });

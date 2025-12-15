@@ -1,80 +1,48 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
+try {
+  require('dotenv').config();
+} catch (e) {
+}
 
 var app = require('../app');
 var debug = require('debug')('express-music-collection:server');
 var http = require('http');
 
-/**
- * Get port from environment and store in Express.
- */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-// Set up mongoose connection
 const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", false);
-// Prefer an environment variable so credentials aren't hard-coded.
-// You can set MONGODB_URI to something like:
-// mongodb+srv://<user>:<password>@cluster0.example.mongodb.net/local_library?retryWrites=true&w=majority
-const mongoDB = process.env.MONGODB_URI || "mongodb+srv://bruno:0SiHIhQ36OxdrXJU@cluster0.mwmswii.mongodb.net/music_collection?retryWrites=true&w=majority&appName=Cluster0";
+const mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017/music_collection';
 
 async function connectMongoose() {
   await mongoose.connect(mongoDB);
 }
 
-// connectMongoose returns a promise; handle rejections explicitly so we
-// don't get uncaught promise rejections. Provide a helpful error message
-// and exit with non-zero code so a process manager can detect failure.
 connectMongoose().catch((err) => {
   console.error("Failed to connect to MongoDB:", err.message || err);
-  // For debugging you can uncomment the next line to log full error
-  // console.error(err);
   process.exit(1);
 });
 
-/**
- * Create HTTP server.
- */
-
 var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
- * Normalize a port into a number, string, or false.
- */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
-    // named pipe
     return val;
   }
 
   if (port >= 0) {
-    // port number
     return port;
   }
 
   return false;
 }
-
-/**
- * Event listener for HTTP server "error" event.
- */
 
 function onError(error) {
   if (error.syscall !== 'listen') {
@@ -85,7 +53,6 @@ function onError(error) {
     ? 'Pipe ' + port
     : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
@@ -99,10 +66,6 @@ function onError(error) {
       throw error;
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   var addr = server.address();

@@ -10,17 +10,14 @@ const ArtistSchema = new Schema({
 	date_of_death: { type: Date },
 });
 
-// Virtual para el nombre completo del artista
 ArtistSchema.virtual('name').get(function () {
 	return `${this.family_name}, ${this.first_name}`;
 });
 
-// Virtual para la URL del artista
 ArtistSchema.virtual('url').get(function () {
 	return `/catalog/artist/${this._id}`;
 });
 
-// Virtuales para fechas formateadas
 ArtistSchema.virtual('date_of_birth_formatted').get(function () {
 	return this.date_of_birth ? DateTime.fromJSDate(this.date_of_birth).toISODate() : '';
 });

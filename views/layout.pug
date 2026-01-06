@@ -30,23 +30,85 @@ html(lang='en')
     .container-fluid
       .row
         .col-md-2.col-lg-2.d-none.d-md-block.p-0
-          aside.sidebar-static.h-100.p-3
-            .brand.mb-4
-              h4.text-white.mb-0 MusicCollection
-              small.text-white-50 v2.0
-            nav.nav.flex-column
-              a.nav-link.text-white(href='/catalog')
-                | Home
-              a.nav-link.text-white(href='/catalog/albums') Albums
-              a.nav-link.text-white(href='/catalog/artists') Artistas
-              a.nav-link.text-white(href='/catalog/genres') Generos
-              a.nav-link.text-white(href='/catalog/albuminstances') Ejemplares
+          aside.sidebar-static.h-100.p-3.d-flex.flex-column
+            .d-flex.align-items-center.mb-4.gap-3
+              .logo.d-flex.align-items-center.justify-content-center.rounded.shadow-sm(style='width:48px;height:48px; background:linear-gradient(180deg,#6c63ff,#5b46e6);')
+                svg(width='22' height='22' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                  path(d='M3 6a2 2 0 0 1 2-2h13' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                  path(d='M21 6v13a2 2 0 0 1-2 2H6' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+              .brand-text
+                h4.text-white.mb-0 MusicColl
+                small.text-white-50 v2.0 Dashboard
+
+            // navigation sections
+            .mt-3.mb-2
+              small.text-muted.d-block.mb-2 LIBRARY
+              nav.nav.flex-column(role='navigation')
+                a.sidebar-item.d-flex.align-items-center(href='/catalog')
+                  span.icon.me-3
+                    // home icon
+                    svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                      path(d='M3 9.5L12 3l9 6.5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                      path(d='M9 22V12h6v10' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                  span.label Home
+                a.sidebar-item.d-flex.align-items-center(href='/catalog/albums')
+                  span.icon.me-3
+                    // albums/grid icon
+                    svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                      rect(x='3' y='3' width='7' height='7' stroke='currentColor' stroke-width='1.5' rx='1')
+                      rect(x='14' y='3' width='7' height='7' stroke='currentColor' stroke-width='1.5' rx='1')
+                      rect(x='3' y='14' width='7' height='7' stroke='currentColor' stroke-width='1.5' rx='1')
+                      rect(x='14' y='14' width='7' height='7' stroke='currentColor' stroke-width='1.5' rx='1')
+                  span.label Albums
+                a.sidebar-item.d-flex.align-items-center(href='/catalog/artists')
+                  span.icon.me-3
+                    // artist/user icon
+                    svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                      path(d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                      circle(cx='12' cy='7' r='4' stroke='currentColor' stroke-width='1.5')
+                  span.label Artistas
+                a.sidebar-item.d-flex.align-items-center(href='/catalog/genres')
+                  span.icon.me-3
+                    // music note icon
+                    svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                      path(d='M9 17V5l10-2v12' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                      circle(cx='7' cy='17' r='3' stroke='currentColor' stroke-width='1.5')
+                  span.label Generos
+                a.sidebar-item.d-flex.align-items-center(href='/catalog/albuminstances')
+                  span.icon.me-3
+                    // list icon
+                    svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                      path(d='M8 6h13' stroke='currentColor' stroke-width='1.5' stroke-linecap='round')
+                      path(d='M8 12h13' stroke='currentColor' stroke-width='1.5' stroke-linecap='round')
+                      path(d='M8 18h13' stroke='currentColor' stroke-width='1.5' stroke-linecap='round')
+                      circle(cx='3.5' cy='6' r='0.5' fill='currentColor')
+                      circle(cx='3.5' cy='12' r='0.5' fill='currentColor')
+                      circle(cx='3.5' cy='18' r='0.5' fill='currentColor')
+                  span.label Ejemplares
+
             hr.border-secondary
+            // management links styled igual que LIBRARY
             nav.nav.flex-column
-              a.nav-link.text-white(href='/catalog/artist/create') + Nuevo artista
-              a.nav-link.text-white(href='/catalog/genre/create') + Nuevo género
-              a.nav-link.text-white(href='/catalog/album/create') + Nuevo álbum
-              a.nav-link.text-white(href='/catalog/albuminstance/create') + Nuevo ejemplar
+              a.sidebar-item.d-flex.align-items-center(href='/catalog/artist/create')
+                span.icon.me-3
+                  svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M12 5v14M5 12h14' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                span.label Nuevo artista
+              a.sidebar-item.d-flex.align-items-center(href='/catalog/genre/create')
+                span.icon.me-3
+                  svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M12 5v14M5 12h14' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                span.label Nuevo género
+              a.sidebar-item.d-flex.align-items-center(href='/catalog/album/create')
+                span.icon.me-3
+                  svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M12 5v14M5 12h14' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                span.label Nuevo álbum
+              a.sidebar-item.d-flex.align-items-center(href='/catalog/albuminstance/create')
+                span.icon.me-3
+                  svg(width='18' height='18' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M12 5v14M5 12h14' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+                span.label Nuevo ejemplar
 
         .col-12.col-md-10.col-lg-10.p-4.main-col
           .d-flex.justify-content-start.mb-3

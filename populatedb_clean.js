@@ -1,6 +1,9 @@
-
-
 const userArgs = process.argv.slice(2);
+
+try {
+  require('dotenv').config();
+} catch (e) {
+}
 
 const Artist = require('./models/artist');
 const Genre = require('./models/genre');
@@ -10,12 +13,13 @@ const AlbumInstance = require('./models/albuminstance');
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
 
-if (!userArgs[0]) {
+const mongoDB = userArgs[0] || process.env.MONGODB_URI;
+
+if (!mongoDB) {
   console.error('Uso: node populatedb_clean "<mongodb_connection_string>"');
+  console.error('O define MONGODB_URI en un archivo .env (MONGODB_URI=mongodb://...)');
   process.exit(1);
 }
-
-const mongoDB = userArgs[0];
 
 const genres = [];
 const artists = [];

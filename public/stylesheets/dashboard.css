@@ -47,12 +47,58 @@ body {
 .bars .bar {
     width: 72px;
     border-radius: 8px;
-    background: linear-gradient(180deg, #7b61ff 0%, #5ec4a8 100%)
+    background: linear-gradient(180deg, #7b61ff 0%, #5ec4a8 100%);
+}
+
+
+
+.bars .bar small.bar-value {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
 }
 
 .labels span {
     width: 72px;
     text-align: center
+}
+
+.chart-footer {
+    gap: 12px;
+}
+
+.chart-footer .chart-item {
+    width: 56px;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.chart-footer .chart-item {
+    transform: translateY(-20px);
+}
+
+.chart-footer .chart-item .count {
+    display: block;
+    font-weight: 600;
+    color: #222;
+    font-size: 13px;
+}
+
+.chart-footer .chart-item .name {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.labels span {
+    width: 72px;
+    text-align: center
+}
+
+.labels span {
+    width: 56px;
+    text-align: center;
+    font-size: 13px;
 }
 
 .sidebar-static {

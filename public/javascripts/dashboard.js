@@ -33,3 +33,32 @@ document.addEventListener('DOMContentLoaded', function(){
   if(overlayClose) overlayClose.addEventListener('click', closeOverlay);
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeOverlay(); });
 });
+
+document.addEventListener('DOMContentLoaded', function(){
+  var chart = document.querySelector('.chart-area');
+  if(!chart) return;
+
+  var bars = chart.querySelectorAll('.bars .bar');
+  var labels = chart.querySelectorAll('.labels span');
+
+  var countsAttr = chart.getAttribute('data-counts') || '';
+  var counts = countsAttr.split(',').map(function(v){
+    var n = parseFloat(v);
+    return isNaN(n) ? 0 : n;
+  });
+
+  var needed = Math.max(bars.length, labels.length, counts.length);
+  while(counts.length < needed) counts.push(0);
+
+  var max = Math.max.apply(null, counts);
+  if(max <= 0) max = 1;
+
+  for(var i=0;i<bars.length;i++){
+    var fill = bars[i].querySelector('.bar-fill');
+    var valueNode = bars[i].querySelector('.bar-value');
+    var val = counts[i] || 0;
+    var pct = Math.max((val / max) * 100, 4);
+    if(fill) fill.style.height = pct + '%';
+    if(valueNode) valueNode.textContent = val + (val === 1 ? ' álbum' : ' álbumes');
+  }
+});

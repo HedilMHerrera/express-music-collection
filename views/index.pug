@@ -35,29 +35,90 @@ block content
 
   .row.g-3
     .col-lg-8
-      .card.shadow-sm.h-100.rounded
-        .card-body
+      .card.shadow-sm.h-100.rounded.d-flex.flex-column
+        .card-body.flex-grow-1
           .d-flex.justify-content-between.align-items-center.mb-3
-            h5.mb-0 Colecciones por genero
+            h5.mb-0 Álbums por género
             select.form-select.form-select-sm(style='width:120px')
               option Este año
               option 2024
               option 2023
               option 2022
 
-          .chart-area.mt-3
-            .bars.d-flex.align-items-end.gap-3
-              .bar(style='height:220px')
-              .bar(style='height:150px')
-              .bar(style='height:80px')
-              .bar(style='height:160px')
-              .bar(style='height:60px')
-            .labels.d-flex.justify-content-between.mt-3
-              span.text-muted Rock
-              span.text-muted Pop
-              span.text-muted Jazz
-              span.text-muted Electronica
-              span.text-muted Clasica
+          - var fallbackCounts = '0,0,0,0,0,0,0,0'
+          .chart-area.mt-3(data-counts=(genreCounts && genreCounts.length ? genreCounts.join(',') : fallbackCounts))
+            .chart-visual.d-flex
+              .y-axis.me-3
+              .chart-main.flex-grow-1.position-relative
+                .chart-grid
+                .bars.d-flex.align-items-end.justify-content-between
+                if (typeof genreCounts !== 'undefined' && genreCounts && genreCounts.length)
+                  each val, i in genreCounts
+                    .bar
+                      .bar-fill
+                else
+                  .bar
+                    .bar-fill
+                  .bar
+                    .bar-fill
+                  .bar
+                    .bar-fill
+                  .bar
+                    .bar-fill
+                  .bar
+                    .bar-fill
+                  .bar
+                    .bar-fill
+                  .bar
+                    .bar-fill
+                  .bar
+                    .bar-fill
+
+          // chart area ends here; footer moved below card-body
+
+        if (typeof genreCounts !== 'undefined' && genreCounts && genreCounts.length && genreNames && genreNames.length)
+          .card-footer.bg-transparent.border-0.mt-2
+            .chart-footer.d-flex.justify-content-between
+              each val, i in genreCounts
+                .chart-item.text-center
+                  small.count= val + (val === 1 ? ' álbum' : ' álbumes')
+                  br
+                  small.name.text-muted= genreNames[i]
+        else
+          .card-footer.bg-transparent.border-0.mt-2
+            .chart-footer.d-flex.justify-content-between
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Blues
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Country
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Electronic
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Jazz
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Opera
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Pop
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Rock
+              .chart-item.text-center
+                small.count 0 álbumes
+                br
+                small.name.text-muted Soul
 
     .col-lg-4
       .card.shadow-sm.h-100.rounded
